@@ -32,6 +32,7 @@ public:
                                   : (a.getMeritScore() <= b.getMeritScore());
             default:
                 return true;
+            
         }
     }
 
