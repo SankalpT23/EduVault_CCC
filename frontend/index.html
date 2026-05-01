@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduVault - Intelligent Student Record Management System with DSA Algorithms">
+    <title>EduVault | Student Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">E</div>
+            <div>
+                <h1>EduVault</h1>
+                <p class="brand-sub">Student Management</p>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-page="dashboard" id="nav-dashboard">
+                <span class="nav-icon">📊</span> Dashboard</a></li>
+            <li><a href="#" class="nav-link" data-page="register" id="nav-register">
+                <span class="nav-icon">➕</span> Register Student</a></li>
+            <li><a href="#" class="nav-link" data-page="students" id="nav-students">
+                <span class="nav-icon">👥</span> All Students</a></li>
+            <li><a href="#" class="nav-link" data-page="search" id="nav-search">
+                <span class="nav-icon">🔍</span> Binary Search</a></li>
+            <li><a href="#" class="nav-link" data-page="rankings" id="nav-rankings">
+                <span class="nav-icon">🏆</span> Merge Sort Rankings</a></li>
+            <li><a href="#" class="nav-link" data-page="knapsack" id="nav-knapsack">
+                <span class="nav-icon">💰</span> Scholarship (DP)</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>DSA Algorithms</p>
+            <div class="algo-tags">
+                <span class="tag tag-blue">Merge Sort</span>
+                <span class="tag tag-green">Binary Search</span>
+                <span class="tag tag-purple">Knapsack DP</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+
+        <!-- Dashboard Page -->
+        <section class="page active" id="page-dashboard">
+            <div class="page-header">
+                <h2>Dashboard</h2>
+                <p class="page-desc">Overview of your institution's data</p>
+            </div>
+            <div class="stats-grid" id="stats-grid">
+                <div class="stat-card stat-total">
+                    <div class="stat-icon">🎓</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+                <div class="stat-card stat-cgpa">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-value" id="stat-avg-cgpa">0.00</div>
+                    <div class="stat-label">Average CGPA</div>
+                </div>
+                <div class="stat-card stat-elite">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="stat-elites">0</div>
+                    <div class="stat-label">Elite Scholars</div>
+                </div>
+                <div class="stat-card stat-alert">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-value" id="stat-alerts">0</div>
+                    <div class="stat-label">Attendance Alerts</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Recent Students</h3>
+                <div class="table-wrapper">
+                    <table id="recent-table">
+                        <thead><tr><th>ID</th><th>Name</th><th>Branch</th><th>CGPA</th><th>Attendance</th><th>Badge</th></tr></thead>
+                        <tbody id="recent-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Page -->
+        <section class="page" id="page-register">
+            <div class="page-header">
+                <h2>Register New Student</h2>
+                <p class="page-desc">Add a student record with auto-generated badge & AI skill</p>
+            </div>
+            <div class="card form-card">
+                <form id="register-form" autocomplete="off">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="reg-id">Student ID</label>
+                            <input type="number" id="reg-id" min="1" max="999999" placeholder="e.g. 1001" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-name">Full Name</label>
+                            <input type="text" id="reg-name" maxlength="49" placeholder="e.g. John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-branch">Branch</label>
+                            <select id="reg-branch" required>
+                                <option value="">Select Branch</option>
+                                <option value="CSE">CSE</option>
+                                <option value="ECE">ECE</option>
+                                <option value="ME">ME</option>
+                                <option value="EEE">EEE</option>
+                                <option value="CIVIL">CIVIL</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-cgpa">CGPA (0 - 10)</label>
+                            <input type="number" id="reg-cgpa" min="0" max="10" step="0.01" placeholder="e.g. 8.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-att">Attendance % (0 - 100)</label>
+                            <input type="number" id="reg-att" min="0" max="100" step="0.1" placeholder="e.g. 85" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-register">Register Student</button>
+                </form>
+                <div id="register-result" class="result-box hidden"></div>
+            </div>
+        </section>
+
+        <!-- All Students Page -->
+        <section class="page" id="page-students">
+            <div class="page-header">
+                <h2>All Students</h2>
+                <p class="page-desc">Complete database view</p>
+            </div>
+            <div class="card">
+                <div class="table-wrapper">
+                    <table id="all-table">
+                        <thead><tr><th>ID</th><th>Name</th><th>Branch</th><th>CGPA</th><th>Att%</th><th>Badge</th><th>AI Skill</th><th>Merit</th><th>Action</th></tr></thead>
+                        <tbody id="all-tbody"></tbody>
+                    </table>
+                </div>
+                <p class="table-footer" id="all-count"></p>
+            </div>
+        </section>
+
+        <!-- Binary Search Page -->
+        <section class="page" id="page-search">
+            <div class="page-header">
+                <h2>Binary Search <span class="algo-badge">O(log n)</span></h2>
+                <p class="page-desc">Find a student by ID using Binary Search after Merge Sort</p>
+            </div>
+            <div class="card">
+                <div class="search-bar">
+                    <input type="number" id="search-id" placeholder="Enter Student ID..." min="1">
+                    <button class="btn btn-primary" id="btn-search">Search</button>
+                </div>
+                <div id="search-result" class="result-box hidden"></div>
+                <div id="search-steps" class="algo-info hidden"></div>
+            </div>
+        </section>
+
+        <!-- Rankings Page -->
+        <section class="page" id="page-rankings">
+            <div class="page-header">
+                <h2>Student Rankings <span class="algo-badge">O(n log n)</span></h2>
+                <p class="page-desc">Leaderboard sorted using Merge Sort algorithm</p>
+            </div>
+            <div class="card">
+                <div class="sort-controls">
+                    <label>Sort by:</label>
+                    <select id="sort-criteria">
+                        <option value="cgpa">CGPA (Highest)</option>
+                        <option value="attendance">Attendance (Highest)</option>
+                        <option value="name">Name (A-Z)</option>
+                        <option value="merit">Merit Score (Highest)</option>
+                    </select>
+                    <button class="btn btn-primary" id="btn-sort">Sort & Rank</button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="rank-table">
+                        <thead><tr><th>Rank</th><th>ID</th><th>Name</th><th>Branch</th><th>CGPA</th><th>Att%</th><th>Badge</th><th>Merit</th></tr></thead>
+                        <tbody id="rank-tbody"></tbody>
+                    </table>
+                </div>
+                <div id="sort-info" class="algo-info hidden"></div>
+            </div>
+        </section>
+
+        <!-- Knapsack Page -->
+        <section class="page" id="page-knapsack">
+            <div class="page-header">
+                <h2>Scholarship Optimizer <span class="algo-badge">0/1 Knapsack DP</span></h2>
+                <p class="page-desc">Select optimal students for scholarships within a budget using Dynamic Programming</p>
+            </div>
+            <div class="card">
+                <div class="knapsack-info">
+                    <p><strong>How it works:</strong> Each student has a <em>merit score</em> (value) and <em>scholarship cost</em> (weight). The DP algorithm finds the combination that maximizes total merit within your budget.</p>
+                    <div class="cost-legend">
+                        <span>CSE/ECE = 50K</span>
+                        <span>ME/EEE = 40K</span>
+                        <span>Others = 30K</span>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <label for="budget-input">Scholarship Budget (in thousands):</label>
+                    <input type="number" id="budget-input" min="1" max="999999" placeholder="e.g. 150">
+                    <button class="btn btn-primary" id="btn-knapsack">Optimize</button>
+                </div>
+                <div id="knapsack-result" class="hidden">
+                    <div class="knapsack-stats" id="knapsack-stats"></div>
+                    <div class="table-wrapper">
+                        <table id="knapsack-table">
+                            <thead><tr><th>ID</th><th>Name</th><th>Branch</th><th>Merit</th><th>Cost (K)</th></tr></thead>
+                            <tbody id="knapsack-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div id="knapsack-algo-info" class="algo-info"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
