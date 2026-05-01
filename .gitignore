@@ -1,0 +1,21 @@
+# Build output
+build/
+*.exe
+*.out
+*.o
+
+# Data files (runtime generated)
+data/students.dat
+data/users.dat
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
